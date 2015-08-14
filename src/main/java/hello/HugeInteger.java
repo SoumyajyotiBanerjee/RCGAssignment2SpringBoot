@@ -63,15 +63,19 @@ public class HugeInteger implements HugeIntegerInterface{
 		}
 		for(int i=0;i<values.length();i++)
 		{
-			System.out.println(values.charAt(i));
+			//System.out.println(values.charAt(i));
 			digits[i]=values.charAt(i)-'0';
 		}
 		return digits;
 	}
 	public boolean operation(HugeInteger second, String Op)
 	{
-		HugeInteger firstNumber = new HugeInteger(this.digits);
-		HugeInteger secondNumber = second;
+		
+		
+		HugeInteger firstNumber = new HugeInteger(parse(reverseString(this.toString())));
+		HugeInteger secondNumber = new HugeInteger(parse(reverseString(second.toString())));
+		
+		System.out.println(" "+firstNumber.toString()+" ||  "+secondNumber.toString());
 		Predicate<HugeInteger> isEqualTo = b -> {
 			return firstNumber.isEqualto(b);
 		};
@@ -174,28 +178,42 @@ public class HugeInteger implements HugeIntegerInterface{
 	
 	public boolean isGreaterThan(HugeInteger second)
 	{
-		for(int i=39;i>=0;i--)
+		if(this.isNotEqualTo(second))
 		{
-			if(this.digits[i]>second.digits[i])
+			for(int i=39;i>=0;i--)
 			{
-				return true;
+				//System.out.println(" - "+this.digits[i]+" === "+second.digits[i]);
+				if(this.digits[i]<second.digits[i])
+				{
+					return false;
+				}
 			}
+			
+			return true;
 		}
+
+			return false;
+	
 		
-		return false;
 	}
 	
 	public boolean isLessThan(HugeInteger second)
 	{
-		for(int i=39;i>=0;i--)
+		if(this.isNotEqualTo(second))
 		{
-			if(this.digits[i]>second.digits[i])
+			for(int i=39;i>=0;i--)
 			{
-				return false;
+				if(this.digits[i]>second.digits[i])
+				{
+					return false;
+				}
 			}
+			
+			return true;
 		}
 		
-		return true;
+		return false;
+	
 	}
 
 	public boolean isGreaterThanOrEqualTo(HugeInteger second)
