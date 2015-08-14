@@ -16,7 +16,7 @@ public class OperationApi {
 		HugeInteger numberA = new HugeInteger(operation.parse(first));
 		operation = new HugeInteger(operation.parse(second));
 		System.out.println(" -- "+numberA.toString()+" >> "+operation.toString());
-		return new HugeInteger(operation.add(numberA)).toString();
+		return operation.reverseString(new HugeInteger(operation.add(numberA)).toString());
 	}
 	
 	@RequestMapping(value = "subtract")
@@ -25,7 +25,7 @@ public class OperationApi {
 		HugeInteger numberA = new HugeInteger(operation.parse(first));
 		operation = new HugeInteger(operation.parse(second));
 		System.out.println(" -- "+numberA.toString()+" >> "+operation.toString());
-		return new HugeInteger(numberA.subtract(operation)).toString();
+		return operation.reverseString(new HugeInteger(numberA.subtract(operation)).toString());
 	}
     
 	@RequestMapping("/operation")
@@ -36,7 +36,7 @@ public class OperationApi {
 		HugeInteger numberA = new HugeInteger(operation.parse(first));
 		operation = new HugeInteger(operation.parse(second));
 		System.out.println(" -- "+numberA.toString()+" >> "+operation.toString());
-		 if(numberA.operation(operation, operator))//true;//operation.toString(); //operations(first, second, operator);
+		 if(numberA.operation(operation, operator))
 		 {
 			 return "true";
 		 }
